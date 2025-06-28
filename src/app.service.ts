@@ -5,8 +5,7 @@ export class AppService {
   getHello() {
     return {
       message: 'Welcome to One Focus Foundation Backend API!',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
+     
     };
   }
 
