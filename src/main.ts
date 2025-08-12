@@ -10,7 +10,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:3000', 
       'http://localhost:5000', 
-      'https://my-portifolio-ufiv.onrender.com',
+      'https://onefocus-fou.onrender.com',
       'https://gabrieldushimeportifolio.netlify.app'
     
     ],
