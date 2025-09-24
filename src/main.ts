@@ -11,7 +11,7 @@ async function bootstrap() {
       'http://localhost:3000', 
       'http://localhost:5000', 
       'https://onefocus-fou.onrender.com',
-      'https://gabrieldushimeportifolio.netlify.app'
+      'https://onefocusfou.netlify.app'
     
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],

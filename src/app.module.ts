@@ -9,7 +9,7 @@ import { GetInvolvedModule } from './Our-Programs/get-involved/get-involved.modu
 import { RegisterNowModule } from './Events/Online-Empowerment-Conference-Africa/register-now.module';
 import { VolunteerModule } from './Get-Involved/Volunteer-With-Us/volunteer.module';
 import { PartnershipModule } from './Get-Involved/Partner-With-Us/partnership.module';
-
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
   
@@ -35,6 +35,7 @@ import { PartnershipModule } from './Get-Involved/Partner-With-Us/partnership.mo
       },
     }),
 
+  AuthModule,
   JoinUsModule,
   BookUsModule,
   GetInvolvedModule,

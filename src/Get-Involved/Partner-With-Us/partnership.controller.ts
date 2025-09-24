@@ -10,6 +10,7 @@ import {
   ParseUUIDPipe,
   ParseIntPipe,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -17,11 +18,13 @@ import {
   ApiResponse,
   ApiQuery,
   ApiParam,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { PartnershipService } from './partnership.service';
 import { CreatePartnershipDto } from './create-partnership.dto';
 import { UpdatePartnershipStatusDto } from './update-partnership-status.dto';
 import { Partnership, PartnershipStatus } from './partnership.entity';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
 @ApiTags('Partnership With Us')
 @Controller('partnerships')
@@ -44,6 +47,8 @@ export class PartnershipController {
   }
 
   @Get()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all partnership requests' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page' })
@@ -66,6 +71,8 @@ export class PartnershipController {
   }
 
   @Get('statistics')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get partnership statistics' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -76,6 +83,8 @@ export class PartnershipController {
   }
 
   @Get(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific partnership request' })
   @ApiParam({ name: 'id', description: 'Partnership ID' })
   @ApiResponse({
@@ -92,6 +101,8 @@ export class PartnershipController {
   }
 
   @Patch(':id/status')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update partnership status (Admin only)' })
   @ApiParam({ name: 'id', description: 'Partnership ID' })
   @ApiResponse({
@@ -111,6 +122,8 @@ export class PartnershipController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete a partnership request' })
   @ApiParam({ name: 'id', description: 'Partnership ID' })
   @ApiResponse({

@@ -10,7 +10,8 @@ import {
   HttpStatus,
   ParseUUIDPipe,
   DefaultValuePipe,
-  ParseIntPipe
+  ParseIntPipe,
+  UseGuards
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -28,6 +29,7 @@ import {
   BookUsStatsResponseDto,
 } from './book-us.dto';
 import { BookingStatus } from './book-us.entity';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
 @ApiTags('Book Now')
 @Controller('book-us')
@@ -68,6 +70,7 @@ export class BookUsController {
 
   @Get()
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all podcast booking applications (Admin only)' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number', example: 1 })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page', example: 10 })
@@ -114,6 +117,7 @@ export class BookUsController {
 
   @Get('stats')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get podcast booking statistics (Admin only)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -131,6 +135,7 @@ export class BookUsController {
 
   @Get('scheduled')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get scheduled podcast applications (Admin only)' })
   @ApiQuery({ name: 'startDate', required: false, type: String, description: 'Start date filter (YYYY-MM-DD)' })
   @ApiQuery({ name: 'endDate', required: false, type: String, description: 'End date filter (YYYY-MM-DD)' })
@@ -186,6 +191,7 @@ export class BookUsController {
 
   @Get(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific application by ID (Admin only)' })
   @ApiParam({ name: 'id', description: 'Application UUID' })
   @ApiResponse({
@@ -251,6 +257,7 @@ export class BookUsController {
 
   @Patch(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update application status and details (Admin only)' })
   @ApiParam({ name: 'id', description: 'Application UUID' })
   @ApiResponse({
@@ -276,6 +283,7 @@ export class BookUsController {
 
   @Delete(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete an application (Admin only)' })
   @ApiParam({ name: 'id', description: 'Application UUID' })
   @ApiResponse({

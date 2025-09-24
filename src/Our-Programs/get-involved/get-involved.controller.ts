@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, HttpStatus, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
 import { GetInvolvedService } from './get-involved.service';
 import { CreateGetInvolvedDto } from './create-get-involved.dto';
 import { GetInvolved } from './get-involved.entity';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
 @ApiTags('Get Involved')
 @Controller('get-involved')
@@ -52,7 +53,8 @@ export class GetInvolvedController {
   }
 
   @Get()
-  @ApiBearerAuth()
+ @ApiBearerAuth()
+ @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all mentorship applications' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -70,6 +72,7 @@ export class GetInvolvedController {
 
   @Get('stats')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get application statistics' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -85,6 +88,7 @@ export class GetInvolvedController {
 
   @Get(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific mentorship application' })
   @ApiParam({ name: 'id', description: 'Application ID' })
   @ApiResponse({
@@ -106,6 +110,7 @@ export class GetInvolvedController {
 
   @Patch(':id/status')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update application status' })
   @ApiParam({ name: 'id', description: 'Application ID' })
   @ApiResponse({
@@ -126,6 +131,7 @@ export class GetInvolvedController {
 
   @Delete(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete a mentorship application' })
   @ApiParam({ name: 'id', description: 'Application ID' })
   @ApiResponse({

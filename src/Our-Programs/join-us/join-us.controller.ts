@@ -10,7 +10,8 @@ import {
   HttpStatus,
   ParseUUIDPipe,
   DefaultValuePipe,
-  ParseIntPipe
+  ParseIntPipe,
+  UseGuards
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -26,6 +27,10 @@ import {
   UpdateJoinUsApplicationDto,
   JoinUsApplicationResponseDto,
 } from './join-us.dto';
+
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+
+
 
 @ApiTags('Join Us')
 @Controller('join-us')
@@ -66,6 +71,7 @@ export class JoinUsController {
 
   @Get()
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all join us applications (Admin only)' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number', example: 1 })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page', example: 10 })
@@ -109,7 +115,8 @@ export class JoinUsController {
   }
 
   @Get('stats')
-  @ApiBearerAuth()
+ @ApiBearerAuth()
+ @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get application statistics (Admin only)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -145,6 +152,7 @@ export class JoinUsController {
 
   @Get(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific application by ID (Admin only)' })
   @ApiParam({ name: 'id', description: 'Application UUID' })
   @ApiResponse({
@@ -208,6 +216,7 @@ export class JoinUsController {
 
   @Patch(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update application status (Admin only)' })
   @ApiParam({ name: 'id', description: 'Application UUID' })
   @ApiResponse({

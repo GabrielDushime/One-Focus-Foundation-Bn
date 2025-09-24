@@ -9,6 +9,7 @@ import {
   Delete,
   Query,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -16,11 +17,13 @@ import {
   ApiResponse,
   ApiParam,
   ApiQuery,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { VolunteerService } from './volunteer.service';
 import { CreateVolunteerDto } from './dto/create-volunteer.dto';
 import { UpdateVolunteerStatusDto } from './dto/update-volunteer-status.dto';
 import { VolunteerQueryDto } from './dto/volunteer-query.dto';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
 
 @ApiTags('Volunteer With Us')
@@ -65,6 +68,8 @@ export class VolunteerController {
   }
 
   @Get()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all volunteer applications (Admin only)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -84,6 +89,8 @@ export class VolunteerController {
   }
 
   @Get('statistics')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get volunteer statistics (Admin only)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -99,6 +106,8 @@ export class VolunteerController {
   }
 
   @Get(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific volunteer application (Admin only)' })
   @ApiParam({ name: 'id', description: 'Volunteer ID' })
   @ApiResponse({
@@ -119,6 +128,8 @@ export class VolunteerController {
   }
 
   @Patch(':id/status')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update volunteer application status (Admin only)' })
   @ApiParam({ name: 'id', description: 'Volunteer ID' })
   @ApiResponse({
@@ -142,6 +153,8 @@ export class VolunteerController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete a volunteer application (Admin only)' })
   @ApiParam({ name: 'id', description: 'Volunteer ID' })
   @ApiResponse({
@@ -161,6 +174,8 @@ export class VolunteerController {
   }
 
   @Get('status/:status')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get volunteers by status (Admin only)' })
   @ApiParam({ 
     name: 'status', 
@@ -182,6 +197,8 @@ export class VolunteerController {
   }
 
   @Get('email/:email')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Check if email exists (Admin only)' })
   @ApiParam({ name: 'email', description: 'Email address to check' })
   @ApiResponse({

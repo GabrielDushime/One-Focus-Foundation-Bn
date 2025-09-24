@@ -10,7 +10,8 @@ import {
   HttpStatus,
   ParseUUIDPipe,
   DefaultValuePipe,
-  ParseIntPipe
+  ParseIntPipe,
+  UseGuards
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -28,6 +29,7 @@ import {
   ConferenceStatsResponseDto,
 } from './register-now.dto';
 import { RegistrationStatus, AgeGroup, EngagementDetails } from './register-now.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Online Empowerment Conference Africa')
 @Controller('register-now')
@@ -68,6 +70,8 @@ export class RegisterNowController {
 
   @Get()
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  
   @ApiOperation({ summary: 'Get all conference registrations (Admin only)' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number', example: 1 })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page', example: 10 })
@@ -116,6 +120,7 @@ export class RegisterNowController {
 
   @Get('stats')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get conference registration statistics (Admin only)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -132,6 +137,8 @@ export class RegisterNowController {
   }
 
   @Get('upcoming')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get upcoming conferences (public endpoint)' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Number of upcoming conferences to retrieve', example: 5 })
   @ApiResponse({
@@ -159,6 +166,7 @@ export class RegisterNowController {
 
   @Get('by-date')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get registrations by conference date (Admin only)' })
   @ApiQuery({ name: 'startDate', required: false, type: String, description: 'Start date filter (YYYY-MM-DD)' })
   @ApiQuery({ name: 'endDate', required: false, type: String, description: 'End date filter (YYYY-MM-DD)' })
@@ -188,6 +196,7 @@ export class RegisterNowController {
 
   @Get('talent-showcase')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get participants interested in talent showcase (Admin only)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -212,6 +221,7 @@ export class RegisterNowController {
 
   @Get(':id')
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific registration by ID (Admin only)' })
   @ApiParam({ name: 'id', description: 'Registration UUID' })
   @ApiResponse({
@@ -233,6 +243,8 @@ export class RegisterNowController {
   }
 
   @Get('email/:email')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Check registration status by email' })
   @ApiParam({ name: 'email', description: 'Email address' })
   @ApiResponse({

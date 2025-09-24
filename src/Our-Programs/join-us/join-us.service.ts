@@ -12,7 +12,7 @@ export class JoinUsService {
   ) {}
 
   async createApplication(createJoinUsApplicationDto: CreateJoinUsApplicationDto): Promise<JoinUsApplication> {
-    // Check if user already applied with this email
+   
     const existingApplication = await this.joinUsRepository.findOne({
       where: { email: createJoinUsApplicationDto.email }
     });
