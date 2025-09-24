@@ -6,13 +6,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-   app.enableCors({
+  app.enableCors({
     origin: [
       'http://localhost:3000', 
       'http://localhost:5000', 
       'https://onefocus-fou.onrender.com',
       'https://onefocusfou.netlify.app'
-    
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
@@ -25,8 +24,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  
-
 
   const config = new DocumentBuilder()
     .setTitle('One Focus Foundation API')
@@ -43,10 +40,15 @@ async function bootstrap() {
   });
 
   const port = process.env.PORT || 3000;
-  await app.listen(port);
   
-  console.log(`Application is running on: http://localhost:${port}`);
-  console.log(`Swagger documentation: http://localhost:${port}/api/docs`);
+  
+  await app.listen(port, '0.0.0.0');
+  
+  console.log(`Application is running on port: ${port}`);
+  console.log(`Swagger documentation available at: /api/docs`);
 }
 
-bootstrap();
+bootstrap().catch(err => {
+  console.error('Error starting application:', err);
+  process.exit(1);
+});
