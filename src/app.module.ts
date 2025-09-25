@@ -10,6 +10,8 @@ import { RegisterNowModule } from './Events/Online-Empowerment-Conference-Africa
 import { VolunteerModule } from './Get-Involved/Volunteer-With-Us/volunteer.module';
 import { PartnershipModule } from './Get-Involved/Partner-With-Us/partnership.module';
 import { AuthModule } from './auth/auth.module';
+import { DonationModule } from './Donation/donation.module';
+import { MentorModule } from './Mentor/mentor.module';
 @Module({
   imports: [
   
@@ -42,6 +44,8 @@ import { AuthModule } from './auth/auth.module';
   RegisterNowModule,
   VolunteerModule,
   PartnershipModule,
+  DonationModule,
+  MentorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
