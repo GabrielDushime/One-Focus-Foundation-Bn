@@ -12,15 +12,20 @@ import { PartnershipModule } from './Get-Involved/Partner-With-Us/partnership.mo
 import { AuthModule } from './auth/auth.module';
 import { DonationModule } from './Donation/donation.module';
 import { MentorModule } from './Mentor/mentor.module';
+import { BasicMembershipModule } from './Membership/Basic/basic-membership.module';
+import { PremiumMembershipModule } from './Membership/Premium/premium-membership.module';
+import { CorporateSponsorModule } from './Membership/Corporate/corporate-sponsor.module';
+import { WorkshopModule } from './Workshop/workshop.module';
+import { ContactModule } from './Contact/contact.module';
+import { SubscribeModule } from './Subscription/subscribe.module';
+
 @Module({
   imports: [
-  
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
     }),
 
-  
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
@@ -37,15 +42,21 @@ import { MentorModule } from './Mentor/mentor.module';
       },
     }),
 
-  AuthModule,
-  JoinUsModule,
-  BookUsModule,
-  GetInvolvedModule,
-  RegisterNowModule,
-  VolunteerModule,
-  PartnershipModule,
-  DonationModule,
-  MentorModule,
+    AuthModule,
+    JoinUsModule,
+    BookUsModule,
+    GetInvolvedModule,
+    RegisterNowModule,
+    VolunteerModule,
+    PartnershipModule,
+    DonationModule,
+    MentorModule,
+    SubscribeModule,
+    BasicMembershipModule,
+    PremiumMembershipModule,
+    CorporateSponsorModule,
+    WorkshopModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],
