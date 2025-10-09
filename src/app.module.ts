@@ -18,6 +18,11 @@ import { CorporateSponsorModule } from './Membership/Corporate/corporate-sponsor
 import { WorkshopModule } from './Workshop/workshop.module';
 import { ContactModule } from './Contact/contact.module';
 import { SubscribeModule } from './Subscription/subscribe.module';
+import { EventModule } from './Event-creation/event.module';
+import { EventRegistrationModule } from './Event-Registration/event-registration.module';
+import { BlogModule } from './Blog/blog.module';
+import { GetInvolvedActionsModule } from './Get-Involved-Actions/get-involved-actions.module';
+import { BeGuestModule } from './Be-Guest/be-guest.module';
 
 @Module({
   imports: [
@@ -57,6 +62,11 @@ import { SubscribeModule } from './Subscription/subscribe.module';
     CorporateSponsorModule,
     WorkshopModule,
     ContactModule,
+    EventModule,
+    EventRegistrationModule,
+    BlogModule,
+    GetInvolvedActionsModule,
+    BeGuestModule, 
   ],
   controllers: [AppController],
   providers: [AppService],
