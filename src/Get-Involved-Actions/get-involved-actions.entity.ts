@@ -34,8 +34,6 @@ export class GetInvolvedAction {
   @Column({ name: 'phone_number', type: 'varchar', length: 50 })
   phoneNumber: string;
 
-  @Column({ name: 'country_code', type: 'varchar', length: 10, nullable: true })
-  countryCode?: string;
 
   @Column({ name: 'email', type: 'varchar', length: 255 })
   email: string;

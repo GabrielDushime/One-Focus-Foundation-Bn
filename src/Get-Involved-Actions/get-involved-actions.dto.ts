@@ -34,10 +34,7 @@ export class CreateGetInvolvedActionDto {
   @Transform(({ value }) => value?.trim())
   phoneNumber: string;
 
-  @ApiPropertyOptional({
-    description: 'Country code for phone number',
-    example: '+250',
-  })
+  
   @IsString()
   @IsOptional()
   @MaxLength(10)
@@ -137,8 +134,7 @@ export class GetInvolvedActionResponseDto {
   @ApiProperty({ description: 'Phone number' })
   phoneNumber: string;
 
-  @ApiProperty({ description: 'Country code', required: false })
-  countryCode?: string;
+  
 
   @ApiProperty({ description: 'Email address' })
   email: string;
