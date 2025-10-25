@@ -23,6 +23,11 @@ import { EventRegistrationModule } from './Event-Registration/event-registration
 import { BlogModule } from './Blog/blog.module';
 import { GetInvolvedActionsModule } from './Get-Involved-Actions/get-involved-actions.module';
 import { BeGuestModule } from './Be-Guest/be-guest.module';
+import { InternshipApplicationModule } from './Internship/internship.module';
+import { SocialMediaSupportModule } from './Social-Media/media.module';
+import { TrainingEnrollmentModule } from './Training/training.module';
+import { BookShootModule } from './Book-Shoot/bookshoot.module';
+import { StartCodingModule } from './Start-Coding/startcoding.module';
 
 @Module({
   imports: [
@@ -67,6 +72,13 @@ import { BeGuestModule } from './Be-Guest/be-guest.module';
     BlogModule,
     GetInvolvedActionsModule,
     BeGuestModule, 
+    InternshipApplicationModule,
+    SocialMediaSupportModule,
+    TrainingEnrollmentModule,
+    BookShootModule,
+    StartCodingModule
+
+
   ],
   controllers: [AppController],
   providers: [AppService],
