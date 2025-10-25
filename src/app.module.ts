@@ -28,6 +28,7 @@ import { SocialMediaSupportModule } from './Social-Media/media.module';
 import { TrainingEnrollmentModule } from './Training/training.module';
 import { BookShootModule } from './Book-Shoot/bookshoot.module';
 import { StartCodingModule } from './Start-Coding/startcoding.module';
+import { CertificateRequestModule } from './Certificate/certificate.module';
 
 @Module({
   imports: [
@@ -76,7 +77,8 @@ import { StartCodingModule } from './Start-Coding/startcoding.module';
     SocialMediaSupportModule,
     TrainingEnrollmentModule,
     BookShootModule,
-    StartCodingModule
+    StartCodingModule,
+    CertificateRequestModule
 
 
   ],
