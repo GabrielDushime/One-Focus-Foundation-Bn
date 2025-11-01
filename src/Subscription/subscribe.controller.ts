@@ -11,12 +11,14 @@ import {
   ParseUUIDPipe,
   Req,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiParam,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { SubscribeService } from './subscribe.service'
 import {
@@ -28,6 +30,7 @@ import {
 } from './subscribe.dto';
 import { SubscriberStatus } from './subscribe.entity';
 import { Request } from 'express';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Subscribe')
 @Controller('subscribe')
@@ -84,6 +87,8 @@ export class SubscribeController {
   }
 
   @Get()
+   @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all subscribers (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -100,6 +105,8 @@ export class SubscribeController {
   }
 
   @Get('stats')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get subscriber statistics (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -116,6 +123,8 @@ export class SubscribeController {
   }
 
   @Get('analytics')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get subscriber analytics (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -132,6 +141,8 @@ export class SubscribeController {
   }
 
   @Get('active')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all active subscribers (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -148,6 +159,8 @@ export class SubscribeController {
   }
 
   @Get('status/:status')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get subscribers by status (Admin)' })
   @ApiParam({ name: 'status', enum: SubscriberStatus })
   @ApiResponse({
@@ -165,6 +178,8 @@ export class SubscribeController {
   }
 
   @Get('export')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Export active subscribers (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -181,6 +196,8 @@ export class SubscribeController {
   }
 
   @Get(':id')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific subscriber by ID (Admin)' })
   @ApiParam({ name: 'id', description: 'Subscriber UUID' })
   @ApiResponse({
@@ -198,6 +215,8 @@ export class SubscribeController {
   }
 
   @Patch(':id')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update a subscriber (Admin)' })
   @ApiParam({ name: 'id', description: 'Subscriber UUID' })
   @ApiResponse({
@@ -218,6 +237,8 @@ export class SubscribeController {
   }
 
   @Delete(':id')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete a subscriber (Admin)' })
   @ApiParam({ name: 'id', description: 'Subscriber UUID' })
   @ApiResponse({

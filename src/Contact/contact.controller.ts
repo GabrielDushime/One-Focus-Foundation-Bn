@@ -10,6 +10,7 @@ import {
   HttpStatus,
   ParseUUIDPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -17,10 +18,12 @@ import {
   ApiResponse,
   ApiParam,
   ApiQuery,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ContactService } from './contact.service';
 import { CreateContactDto, UpdateContactDto, ContactResponseDto, ContactStatsDto } from './contact.dto';
 import { ContactStatus } from './contact.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Contacts')
 @Controller('contact')
@@ -44,6 +47,8 @@ export class ContactController {
   }
 
   @Get()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all contacts' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -60,6 +65,8 @@ export class ContactController {
   }
 
   @Get('stats')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get contact statistics (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -76,6 +83,8 @@ export class ContactController {
   }
 
   @Get('new')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all new messages (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -92,6 +101,8 @@ export class ContactController {
   }
 
   @Get('unread')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all unread messages (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -108,6 +119,8 @@ export class ContactController {
   }
 
   @Get('status/:status')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get messages by status (Admin)' })
   @ApiParam({ name: 'status', enum: ContactStatus })
   @ApiResponse({
@@ -125,6 +138,8 @@ export class ContactController {
   }
 
   @Get(':id')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a specific contact by ID' })
   @ApiParam({ name: 'id', description: 'Contact UUID' })
   @ApiResponse({
@@ -142,6 +157,8 @@ export class ContactController {
   }
 
   @Patch(':id')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update a contact (Admin)' })
   @ApiParam({ name: 'id', description: 'Contact UUID' })
   @ApiResponse({
@@ -162,6 +179,8 @@ export class ContactController {
   }
 
   @Patch(':id/read')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Mark message as read (Admin)' })
   @ApiParam({ name: 'id', description: 'Contact UUID' })
   @ApiResponse({
@@ -179,6 +198,8 @@ export class ContactController {
   }
 
   @Patch(':id/reply')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Mark message as replied (Admin)' })
   @ApiParam({ name: 'id', description: 'Contact UUID' })
   @ApiResponse({
@@ -199,6 +220,8 @@ export class ContactController {
   }
 
   @Patch(':id/archive')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Archive a message (Admin)' })
   @ApiParam({ name: 'id', description: 'Contact UUID' })
   @ApiResponse({
@@ -216,6 +239,8 @@ export class ContactController {
   }
 
   @Delete(':id')
+   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete a contact (Admin)' })
   @ApiParam({ name: 'id', description: 'Contact UUID' })
   @ApiResponse({
