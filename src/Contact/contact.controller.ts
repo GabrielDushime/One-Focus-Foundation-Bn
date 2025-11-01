@@ -46,7 +46,7 @@ export class ContactController {
     };
   }
 
-  @Get()
+  @Get('contacters')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all contacts' })

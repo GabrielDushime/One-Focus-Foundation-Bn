@@ -86,9 +86,9 @@ export class SubscribeController {
     };
   }
 
-  @Get()
-   @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+  @Get('subscribers')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all subscribers (Admin)' })
   @ApiResponse({
     status: HttpStatus.OK,
